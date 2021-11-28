@@ -5,6 +5,7 @@
 <script>
 	import {Videodata} from "../lib/video/videodata.svelte";
 	import { Swiper, SwiperSlide, } from 'swiper/svelte';
+	import { Virtual } from 'swiper';
 	// Map over video data and return only the URL's for each video
 	let VideodataUrl = Videodata.map(video=> {
 		return video.url
@@ -14,7 +15,7 @@
 
 	import 'swiper/css';
 	import "swiper/css/pagination";
-
+	
 	import SwiperCore, {
 		Pagination,
 		} from 'swiper';
@@ -31,6 +32,7 @@
 <div id="swiperwrap">
 	
 		<Swiper
+		modules={[Virtual]}
 		style="height:100%;"
 		direction="{'vertical'}"
 		pagination='{{
@@ -38,21 +40,28 @@
 		  }}'
 		on:slideChange={() => console.log('slide change')}
 		on:swiper={(e) => console.log(e.detail[0])}
+		virtual={{ slides: VideodataUrl }}
+    	let:virtualData={{ slides, offset, from }}
 		class="mySwiper"
 	>
-	<SwiperSlide>
-		<!-- Added the below iframe so certain sites would play videos, direct URL is needed -->
-		<div class="iframe-overlay"></div>
-			<div class="iframe-controls">
-			<iframe
-				class="iframeplaya"
-				title="video"
-				src={Videodata[1].url}>
-			</iframe>
-		</div>
-	
-	</SwiperSlide>
-	<SwiperSlide>Slide 2</SwiperSlide>
+	{#each slides as slide, index (from + index)}
+		<SwiperSlide
+			virtualIndex={from + index}
+			style={`left: ${offset}px`}
+		>
+			<!-- Added the below iframe so certain sites would play videos, direct URL is needed -->
+			<div class="iframe-overlay"></div>
+				<div class="iframe-controls">
+				<iframe
+					type="text/html"
+					class="iframeplaya"
+					title="video"
+					src={slide}>
+				</iframe>
+			</div>
+		
+		</SwiperSlide>
+	{/each}
 
 		</Swiper>
 	
@@ -78,7 +87,7 @@ section {
 
 #swiperwrap {
   height: 100vh;
-  align-self: center;
+  text-align: center;
 }
 
 

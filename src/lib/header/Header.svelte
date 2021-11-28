@@ -1,9 +1,18 @@
 <script>
 	import { page } from '$app/stores';
 	import logo from './svelte-logo.svg';
+	import Hamburger from 'svelte-hamburgers';
+	import Menu from '$lib/header/menu.svelte'
+	let open;
+
 </script>
+<svelte:head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/svelte-hamburgers@3/dist/css/base.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/svelte-hamburgers@3/dist/css/types/spin.css" />
+</svelte:head>
 
 <header>
+	
 	<div class="corner">
 		<a href="https://kit.svelte.dev">
 			<img src={logo} alt="SvelteKit" />
@@ -11,7 +20,8 @@
 	</div>
 
 	<nav>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
+		<Menu bind:open />
+		<!-- <svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
 		</svg>
 		<ul>
@@ -21,15 +31,28 @@
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-		</svg>
+		</svg> -->
 	</nav>
 
-	<div class="corner">
-		<!-- TODO put something else here? github link? -->
-	</div>
+	<!-- <div class="corner"> -->
+		<div class="hamburgermenu">
+			<Hamburger bind:open />
+			<div class="hamburgerlinks">
+				
+			</div>
+			<!-- {#if open}
+			<ul>
+				<li class:active={$page.path === '/'}><a sveltekit:prefetch href="/">Home</a></li>
+				<li class:active={$page.path === '/about'}><a sveltekit:prefetch href="/about">About</a></li>
+				<li class:active={$page.path === '/todos'}><a sveltekit:prefetch href="/todos">Todos</a></li>
+			</ul>
+			{/if} -->
+		</div>
+	<!-- </div> -->
 </header>
 
 <style>
+	
 	header {
 		display: flex;
 		justify-content: space-between;
@@ -54,10 +77,20 @@
 		object-fit: contain;
 	}
 
+	.hamburgermenu {
+		/* position: absolute; */
+		z-index: 3;
+	}
+
 	nav {
-		display: flex;
-		justify-content: center;
+		/* display: flex; */
+		/* justify-content: center; */
+
 		--background: rgba(255, 255, 255, 0.7);
+		position: absolute;
+		z-index: 2;
+		width: 100%;
+		background-color: #dfe7f0;
 	}
 
 	svg {
