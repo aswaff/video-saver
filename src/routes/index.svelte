@@ -50,7 +50,8 @@
 			style={`left: ${offset}px`}
 		>
 			<!-- Added the below iframe so certain sites would play videos, direct URL is needed -->
-			<div class="iframe-overlay"></div>
+			<!-- Need to investigate forwarding click events to swiper js from below div -->
+			<!-- <div class="iframe-overlay"></div> -->
 				<div class="iframe-controls">
 				<iframe
 					type="text/html"
