@@ -6,6 +6,16 @@
 	import {Videodata} from "../lib/video/videodata.svelte";
 	import { Swiper, SwiperSlide, } from 'swiper/svelte';
 	import { Virtual } from 'swiper';
+	import { onMount } from "svelte";
+	// import { get, store } from 'svelte/store';
+	import { ApiData } from "$lib/video/store.js"
+	let ApiData_value;
+
+	ApiData.subscribe(value => {
+		ApiData_value = value;
+	});
+
+
 	// Map over video data and return only the URL's for each video
 	let VideodataUrl = Videodata.map(video=> {
 		return video.url
@@ -21,6 +31,18 @@
 		} from 'swiper';
 	
 	SwiperCore.use([Pagination]);
+
+
+
+	onMount(async () => {
+  fetch("http://localhost:5000/tasks")
+  .then(response => response.json())
+  .then(data => {
+	  	ApiData.set(data)
+		console.log(ApiData_value);
+  })
+});
+
 </script>
 
 
@@ -50,7 +72,7 @@
 			style={`left: ${offset}px`}
 		>
 			<!-- Added the below iframe so certain sites would play videos, direct URL is needed -->
-			<!-- Need to investigate forwarding click events to swiper js from below div -->
+			<!-- Need to investigate forwarding click events to swiper js from below divgi -->
 			<!-- <div class="iframe-overlay"></div> -->
 				<div class="iframe-controls">
 				<iframe
