@@ -9,11 +9,11 @@
 	import { onMount } from "svelte";
 	// import { get, store } from 'svelte/store';
 	import { ApiData, videoUrl } from "$lib/video/store.js"
-	let ApiData_value;
+	// let ApiData_value;
 
-	ApiData.subscribe(value => {
-		ApiData_value = value;
-	});
+	// ApiData.subscribe(value => {
+	// 	ApiData_value = value;
+	// });
 
 	
 
@@ -37,19 +37,21 @@
 
 
 	onMount(async () => {
-  fetch("http://localhost:5000/tasks")
+  fetch("http://192.168.0.3:5000/tasks")
   .then(response => response.json())
   .then(data => {
 	  	ApiData.set(data)
 		console.log($videoUrl)
-  })
+  }).catch(error => {
+    console.log(error);
+    return [];
+  });
 });
 
 
 
 
 </script>
-
 
 
 <svelte:head>
@@ -66,7 +68,7 @@
 		  }}'
 		on:slideChange={() => console.log('slide change')}
 		on:swiper={(e) => console.log(e.detail[0])}
-		virtual={{ slides: VideodataUrl }}
+		virtual={{ slides: $videoUrl }}
     	let:virtualData={{ slides, offset, from }}
 		class="mySwiper"
 	>
@@ -78,21 +80,26 @@
 			<!-- Added the below iframe so certain sites would play videos, direct URL is needed -->
 			<!-- Need to investigate forwarding click events to swiper js from below divgi -->
 			<!-- <div class="iframe-overlay"></div> -->
-				<div class="iframe-controls">
+				<div class="iframe-controls"
+				style="max-width: 56vh;">
 				<iframe
 					type="text/html"
 					class="iframeplaya"
 					title="video"
+					allow="encrypted-media"
 					src={slide}>
+					
 				</iframe>
 			</div>
-		
+			
 		</SwiperSlide>
 	{/each}
 
 		</Swiper>
 	
 </div>
+
+
 <section>
 
 </section>
