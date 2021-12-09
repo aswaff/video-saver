@@ -32,7 +32,8 @@
 		Pagination,
 		} from 'swiper';
 	
-	SwiperCore.use([Pagination]);
+	SwiperCore.use([Pagination, Virtual]);
+	
 
 
 
@@ -59,6 +60,8 @@
 </svelte:head>
 <div id="swiperwrap">
 	
+	<!-- autoHeight="{true}" 
+		Possible use for Swiper -->
 		<Swiper
 		modules={[Virtual]}
 		style="height:100%;"
@@ -75,21 +78,24 @@
 	{#each slides as slide, index (from + index)}
 		<SwiperSlide
 			virtualIndex={from + index}
-			style={`left: ${offset}px`}
+			style={`top: ${offset}px`}
+			
 		>
 			<!-- Added the below iframe so certain sites would play videos, direct URL is needed -->
 			<!-- Need to investigate forwarding click events to swiper js from below divgi -->
 			<!-- <div class="iframe-overlay"></div> -->
 				<div class="iframe-controls"
 				style="max-width: 56vh;">
+				<div class="test">
+					
 				<iframe
-					type="text/html"
-					class="iframeplaya"
+
 					title="video"
 					allow="encrypted-media"
 					src={slide}>
 					
 				</iframe>
+				</div>
 			</div>
 			
 		</SwiperSlide>
@@ -113,10 +119,17 @@ section {
 	flex: 1;
 }
 
+
+
 .iframe-overlay {
 	width: 95vw;
 	height: 70%;
 	position: absolute;
+}
+
+.iframe-controls {
+	height: 100vh;
+	display: contents;
 }
 
 #swiperwrap {
