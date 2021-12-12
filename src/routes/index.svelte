@@ -38,7 +38,7 @@
 
 
 	onMount(async () => {
-  fetch("http://192.168.0.3:5000/tasks")
+  fetch("http://192.168.0.16:5000/tasks")
   .then(response => response.json())
   .then(data => {
 	  	ApiData.set(data)
@@ -48,7 +48,6 @@
     return [];
   });
 });
-
 
 
 
@@ -85,17 +84,16 @@
 			<!-- Need to investigate forwarding click events to swiper js from below divgi -->
 			<!-- <div class="iframe-overlay"></div> -->
 				<div class="iframe-controls"
-				style="max-width: 56vh;">
-				<div class="test">
+				>
 					
 				<iframe
-
+					class="iframe"
 					title="video"
 					allow="encrypted-media"
 					src={slide}>
 					
 				</iframe>
-				</div>
+			
 			</div>
 			
 		</SwiperSlide>
@@ -106,34 +104,46 @@
 </div>
 
 
-<section>
-
-</section>
 
 <style>
-section {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	flex: 1;
+html,body {
+	height:100%; 
+	width:100%; 
+	margin:0;
 }
 
 
 
+
 .iframe-overlay {
-	width: 95vw;
+	width: 90vw;
 	height: 70%;
 	position: absolute;
 }
 
 .iframe-controls {
+	height: 90vh;
+	display: flex;
+    justify-content: center;
+}
+
+.iframe-holder {
 	height: 100vh;
-	display: contents;
+}
+
+/* .iframe {
+	height: 100vh;
+	width: 90vw;
+	margin: auto;
+
+} */
+
+.iframe #document html {
+	text-align: -webkit-center;
 }
 
 #swiperwrap {
-  height: 100vh;
+  height: 90vh;
   text-align: center;
 }
 
