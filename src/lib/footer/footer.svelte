@@ -5,8 +5,8 @@
 
 <hr />
 <div class="footer-wrapper">
-    <img src={homebutton} alt="home" />
-    <img src={plus} alt="plus" />
+    <a href="/"><img src={homebutton} alt="home" /></a>
+    <a href="/add"><img src={plus} alt="plus" /></a>
 
 
 
@@ -14,6 +14,10 @@
 
 
 <style>
+    a {
+        display: flex;
+    }
+
     hr {
     width: -webkit-fill-available;
     border: 1px solid black;

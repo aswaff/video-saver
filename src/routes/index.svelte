@@ -83,18 +83,9 @@
 			<!-- Added the below iframe so certain sites would play videos, direct URL is needed -->
 			<!-- Need to investigate forwarding click events to swiper js from below divgi -->
 			<!-- <div class="iframe-overlay"></div> -->
-				<div class="iframe-controls"
-				>
-					
-				<iframe
-					class="iframe"
-					title="video"
-					allow="encrypted-media"
-					src={slide}>
-					
-				</iframe>
-			
-			</div>
+			<div class="iframe-holder">
+{@html slide}
+</div>
 			
 		</SwiperSlide>
 	{/each}
@@ -125,10 +116,15 @@ html,body {
 	height: 90vh;
 	display: flex;
     justify-content: center;
+	
 }
 
 .iframe-holder {
 	height: 100vh;
+}
+
+.iframe-holder div div {
+	position: inherit;
 }
 
 /* .iframe {
@@ -138,9 +134,6 @@ html,body {
 
 } */
 
-.iframe #document html {
-	text-align: -webkit-center;
-}
 
 #swiperwrap {
   height: 90vh;
