@@ -38,7 +38,7 @@
 
 
 	onMount(async () => {
-  fetch("http://192.168.0.16:5000/tasks")
+  fetch("http://localhost:5000/tasks")
   .then(response => response.json())
   .then(data => {
 	  	ApiData.set(data)
@@ -84,7 +84,9 @@
 			<!-- Need to investigate forwarding click events to swiper js from below divgi -->
 			<!-- <div class="iframe-overlay"></div> -->
 			<div class="iframe-holder">
+				<div>
 {@html slide}
+</div>
 </div>
 			
 		</SwiperSlide>
@@ -121,10 +123,15 @@ html,body {
 
 .iframe-holder {
 	height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: -webkit-center;
 }
 
-.iframe-holder div div {
-	position: inherit;
+.iframe-holder div {
+	overflow-y: clip;
+	height: 90vh;
 }
 
 /* .iframe {
