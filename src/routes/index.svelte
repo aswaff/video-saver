@@ -38,7 +38,7 @@
 
 
 	onMount(async () => {
-  fetch("http://localhost:5000/tasks")
+  fetch("http://192.168.0.16:5000/tasks")
   .then(response => response.json())
   .then(data => {
 	  	ApiData.set(data)
