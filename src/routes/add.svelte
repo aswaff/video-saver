@@ -1,17 +1,17 @@
-<script context="module">
-	import { browser, dev } from '$app/env';
+<script	>
+let URL = ""
+let Catagory = ""
+let iframeResult = null
 
-	// we don't need any JS on this page, though we'll load
-	// it in dev so that we get hot module replacement...
-	export const hydrate = dev;
-
-	// ...but if the client-side router is already loaded
-	// (i.e. we came here from elsewhere in the app), use it
-	export const router = browser;
-
-	// since there's no dynamic data here, we can prerender
-	// it so that it gets served as a static asset in prod
-	export const prerender = true;
+async function iframeGet () {
+		const res = await fetch(`https://iframe.ly/api/iframely?url=${URL}&key=5684147d970b5663f90cfc1c15410b81`, {
+			method: 'Get',
+			
+		})
+		const json = await res.json()
+		iframeResult = JSON.stringify(json)
+		{console.log(json)}
+	}
 </script>
 
 <svelte:head>
@@ -20,12 +20,15 @@
 
 <div class="content-wrapper">
 	<h1>Add a video</h1>
-
+	
 	<form class="content">
 		<label>Video URL</label>
-		<input type="text"  />
+		<input type="text"  bind:value={URL}/>
 		<label>Category</label>
-		<input type="text"  />
+		<input type="text" bind:value={Catagory} />
+		<button type="button" on:click={iframeGet}>
+			Post it.
+		</button>
 	  </form>
 </div>
 

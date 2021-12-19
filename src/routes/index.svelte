@@ -14,7 +14,7 @@
 	// ApiData.subscribe(value => {
 	// 	ApiData_value = value;
 	// });
-
+	
 	
 
 
@@ -65,9 +65,8 @@
 		modules={[Virtual]}
 		style="height:100%;"
 		direction="{'vertical'}"
-		pagination='{{
-			"clickable": true
-		  }}'
+		
+		  
 		on:slideChange={() => console.log('slide change')}
 		on:swiper={(e) => console.log(e.detail[0])}
 		virtual={{ slides: $videoUrl }}

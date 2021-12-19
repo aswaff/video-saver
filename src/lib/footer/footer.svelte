@@ -1,13 +1,25 @@
 <script>
-    import homebutton from "./iconmonstr-home-6.svg"
-    import plus from "./iconmonstr-plus-2.svg"
+    import homebutton from "./iconmonstr-home-6.svg";
+    import down from "./iconmonstr-angel-down-thin.svg"
+    import plus from "./iconmonstr-plus-2.svg";;
+
+   function handleClickNext(){
+        document.querySelector('.swiper').swiper.slideNext()
+    }
+    function handleClickPrev(){
+        document.querySelector('.swiper').swiper.slidePrev()
+    }
+
+    // let swiperSelector = document.querySelector('.swiper').swiper; 
+
 </script>
 
 <hr />
 <div class="footer-wrapper">
+    <img class="up" src={down} alt="down" on:click="{handleClickPrev}"/>
     <a href="/"><img src={homebutton} alt="home" /></a>
     <a href="/add"><img src={plus} alt="plus" /></a>
-
+    <img class="down" src={down} alt="down" on:click="{handleClickNext}"/>
 
 
 </div>
@@ -28,6 +40,23 @@
         display: flex;
         justify-content: center;
         height: 7vh;
+    }
+
+    .up {
+    cursor: pointer;
+    display: flex;
+    flex-basis: content;
+    transform: scaleY(-1);
+    margin-right: auto;
+    margin-left: 4vw;
+    }
+
+    .down {
+    cursor: pointer;
+    display: flex;
+    flex-basis: content;
+    margin-left: auto;
+    margin-right: 4vw;
     }
 
     img {
