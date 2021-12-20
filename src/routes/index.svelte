@@ -49,7 +49,12 @@
   });
 });
 
-
+const slideChange = () => {
+	const iframeSelector = document.querySelectorAll('iframe');
+	// iframeSelector.forEach(iframe => iframe.style.height = "80%");
+	// iframeSelector.forEach(iframe => iframe.style.width = "80%");
+	console.log('slide change');
+}
 
 </script>
 
@@ -67,7 +72,7 @@
 		direction="{'vertical'}"
 		
 		  
-		on:slideChange={() => console.log('slide change')}
+		on:slideChange={() => slideChange() }
 		on:swiper={(e) => console.log(e.detail[0])}
 		virtual={{ slides: $videoUrl }}
     	let:virtualData={{ slides, offset, from }}
@@ -134,7 +139,7 @@ html,body {
 }
 
 /* .iframe {
-	height: 100vh;
+	height: 85vh;
 	width: 90vw;
 	margin: auto;
 
