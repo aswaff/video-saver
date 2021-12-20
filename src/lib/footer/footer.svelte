@@ -1,7 +1,8 @@
 <script>
     import homebutton from "./iconmonstr-home-6.svg";
     import down from "./iconmonstr-angel-down-thin.svg"
-    import plus from "./iconmonstr-plus-2.svg";;
+    import plus from "./iconmonstr-plus-2.svg";
+    import search from "./iconmonstr-magnifier-2.svg";
 
    function handleClickNext(){
         document.querySelector('.swiper').swiper.slideNext()
@@ -19,6 +20,7 @@
     <img class="up" src={down} alt="down" on:click="{handleClickPrev}"/>
     <a href="/"><img src={homebutton} alt="home" /></a>
     <a href="/add"><img src={plus} alt="plus" /></a>
+    <a href="/search"><img src={search} alt="search" /></a>
     <img class="down" src={down} alt="down" on:click="{handleClickNext}"/>
 
 

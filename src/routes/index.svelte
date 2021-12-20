@@ -48,7 +48,7 @@
     return [];
   });
 });
-
+$: ApiData, console.log($ApiData)
 // Function that runs on each slide change
 const slideChange = () => {
 	const iframeSelector = document.querySelectorAll('iframe');
