@@ -49,10 +49,12 @@
   });
 });
 
+// Function that runs on each slide change
 const slideChange = () => {
 	const iframeSelector = document.querySelectorAll('iframe');
-	// iframeSelector.forEach(iframe => iframe.style.height = "80%");
+	iframeSelector.forEach(iframe => iframe.style.maxHeight = "80%");
 	// iframeSelector.forEach(iframe => iframe.style.width = "80%");
+	
 	console.log('slide change');
 }
 
