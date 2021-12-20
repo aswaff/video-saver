@@ -14,6 +14,7 @@ let categoryOptions = [
 	{ id: "2", value: "Music"},
 	{ id: "3", value: "Other"}
 ]
+let catego
 
 // Post data returned
 let POSTresult = null;
@@ -137,9 +138,9 @@ async function doPost () {
 	  <p></p>
 	 	 {:else if URLnew}
 		  {#if POSTresult === null}
-		  <select bind:value={Catagory} on:change="{() => Catagory = ''}">
+		  <select bind:value={Category}>
 			{#each categoryOptions as option}
-				<option value={option}>{option.value}</option>
+				<option value={option.value}>{option.value}</option>
 			{/each}	
 		</select>
 		<button type="button" on:click={doPost}>
