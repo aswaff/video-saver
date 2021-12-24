@@ -1,5 +1,5 @@
 <script>
-import Box from '../lib/Box-Component/box.svelte'
+import Box from '$lib/Box-Component/box.svelte'
 
 import { ApiSearchData } from "$lib/video/store.js"
 // Selection in the search box
