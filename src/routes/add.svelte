@@ -61,9 +61,9 @@ const checkURL = (url) => {
 }
 
 
-// function from submit URL button to go to iframely
+// function from submit URL button to go to iframely, using the oembed format for uniformity
 const iframeGet = async () => {
-		const res = await fetch(`https://iframe.ly/api/iframely?url=${URLbox}&key=5684147d970b5663f90cfc1c15410b81`)
+		const res = await fetch(`https://iframe.ly/api/oembed?url=${URLbox}&key=5684147d970b5663f90cfc1c15410b81`)
 		
 		if (res.status === 200){
 			return res.json()
@@ -84,9 +84,9 @@ const firstClick = () => {
 			const a = await iframelyPromise;
 			iframeResult = a
 			URL = a.url
-			URLembed = a.links.player[0].href
-			HTML = a.links.player[0].html
-			Thumbnail = a.links.thumbnail[0].href
+			// URLembed = a.links.player[0].href
+			HTML = a.html
+			Thumbnail = a.thumbnail_url
 			console.log(a)
 			checkURL(a.url);
 		}
@@ -154,7 +154,7 @@ async function doPost () {
 		<p>Video Already exists in database</p>
 		
 		{/if}
-		<img src="{apiResponse ? `${apiResponse.links.thumbnail[0].href} `: ''}" />
+		<img src="{apiResponse ? `${apiResponse.thumbnail_url} `: ''}" />
 	{:catch error}
 	  <p style="color: red">Error with fetching</p>
 	{/await}

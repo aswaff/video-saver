@@ -1,7 +1,10 @@
-<script>
-import Box from '$lib/Box-Component/box.svelte'
 
-import { ApiSearchData } from "$lib/video/store.js"
+<script>
+
+    
+import Box from '$lib/Box-Component/box.svelte'
+import { onMount } from "svelte";
+import { ApiSearchData, checkForData } from "$lib/video/store.js"
 // Selection in the search box
 let categoryOptions = [
 	{ id: "1", value: "Cute"},
@@ -11,31 +14,55 @@ let categoryOptions = [
 
 let Category = "Other"
 let searchResult;
+let videoThumbnail;
 
     const searchButton = () => {
         // searchResult = $ApiSearchData.find( ({ Category }) => Category === 'Music' );
         console.log(Category)
-        checkForData()
+        checkForData(Category)
         
     }
  $: searchResult, console.log(searchResult)
 
-$: ApiSearchData, console.log($ApiSearchData)
 
 $: ApiSearchData, console.log($ApiSearchData)
 
-// Checks to see if store is up to date
-const checkForData = () => {
-        fetch(`http://192.168.0.16:5000/search?Category=${Category}`)
+// onMount(async () => {
+//   fetch("http://192.168.0.16:5000/tasks")
+//   .then(response => response.json())
+//   .then(data => {
+// 	  	ApiSearchData.set(data)
+//   }).catch(error => {
+//     console.log(error);
+//     return [];
+//   });
+// });
+
+// testing... possibly will remove
+const getThumbnail = () => {
+   ApiSearchData.map(video =>
+        fetch(`https://iframe.ly/api/oembed?url=${video.URL}&key=5684147d970b5663f90cfc1c15410b81`)
         .then(response => response.json())
         .then(data => {
                 ApiSearchData.set(data)
         }).catch(error => {
             console.log(error);
             return [];
-        });
-        
+        })
+   )
 }
+
+// Checks to see if store is up to date
+// const checkForData = () => {
+//         fetch(`http://192.168.0.16:5000/search?Category=${Category}`)
+//         .then(response => response.json())
+//         .then(data => {
+//                 ApiSearchData.set(data)
+//         }).catch(error => {
+//             console.log(error);
+//             return [];
+//         });
+// }
 
 
 </script>
@@ -61,9 +88,9 @@ const checkForData = () => {
 
     <p></p>
     <div class="box-wrapper">
-        {#each $ApiSearchData as { id, URL, Thumbnail }, i}
+        {#each $ApiSearchData as { _id, URL, Thumbnail }, i}
         <Box>
-            <img src="{Thumbnail}" alt="thumbnail" />
+            <a href="/search/{_id}"><img src="{Thumbnail}" alt="thumbnail" /></a>
             <p></p>
             {URL}
         </Box>

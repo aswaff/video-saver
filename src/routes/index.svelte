@@ -1,6 +1,6 @@
-<script context="module">
+<!-- <script context="module">
 	export const prerender = true;
-</script>
+</script> -->
 
 <script>
 	import {Videodata} from "../lib/video/videodata.svelte";
@@ -63,6 +63,8 @@ const slideChange = () => {
 
 <svelte:head>
 	<title>Home</title>
+	<script async src="https://www.tiktok.com/embed.js"></script>
+	
 </svelte:head>
 <div id="swiperwrap">
 	
@@ -72,7 +74,6 @@ const slideChange = () => {
 		modules={[Virtual]}
 		style="height:100%;"
 		direction="{'vertical'}"
-		
 		  
 		on:slideChange={() => slideChange() }
 		on:swiper={(e) => console.log(e.detail[0])}
