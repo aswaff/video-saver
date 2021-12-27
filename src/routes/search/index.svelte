@@ -5,6 +5,8 @@
 import Box from '$lib/Box-Component/box.svelte'
 import { onMount } from "svelte";
 import { ApiSearchData, checkForData } from "$lib/video/store.js"
+// import { overlayOn, overlayOff } from "./overlay.svelte"
+import Overylay, {overlayOn} from "./overlay.svelte"
 // Selection in the search box
 let categoryOptions = [
 	{ id: "1", value: "Cute"},
@@ -90,11 +92,16 @@ const getThumbnail = () => {
     <div class="box-wrapper">
         {#each $ApiSearchData as { _id, URL, Thumbnail }, i}
         <Box>
-            <a href="/search/{_id}"><img src="{Thumbnail}" alt="thumbnail" /></a>
+            <img src="{Thumbnail}" alt="thumbnail" on:click={overlayOn}/>
+            <!-- Will likely remove below -->
+            <!-- <a href="/search/{_id}"><img src="{Thumbnail}" alt="thumbnail" /></a> -->
             <p></p>
             {URL}
+            <!-- Below is the overlay HTML content -->
+        <Overylay />
         </Box>
         {/each}
+        
     </div>  
 
 
@@ -125,4 +132,5 @@ const getThumbnail = () => {
     .box-wrapper img {
         width: 30vw;
     }
+
 </style>
