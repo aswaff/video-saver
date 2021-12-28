@@ -22,6 +22,8 @@
     
 }
 
+
+
 </script>
 
 <script>
@@ -32,8 +34,13 @@
     import { afterUpdate } from 'svelte';
     import { onMount } from "svelte";
 
-    export let url;
-    export let id;
+    let URL;
+    let HTML;
+    let Thumbnail;
+    let Category;
+
+
+
     // export let HTML;
 
     const overlayOff = () => {
@@ -41,6 +48,10 @@
         document.getElementById("overlay").style.display = "none";
         document.body.style.overflow = "auto"
 
+    }
+
+    const editOverlayOn = () => {
+        document.getElementById("edit-overlay").style.display = "block";
     }
 
 //     onMount(async () => {
@@ -57,6 +68,8 @@
 	
 // });
 
+// After a day of trying to figure this out, below code works for making tiktok embed js videos load.
+// Adding them to head does not always work
 afterUpdate(() => {
     const script = document.createElement('script')
     script.async = true
@@ -64,6 +77,23 @@ afterUpdate(() => {
     document.body.appendChild(script)
 })
 
+async function doUpdate () {
+  const res = await fetch(`http://192.168.0.16:5000/tasks/${ApiSpecificData._id}`, {
+    method: 'PUT',
+    headers: {
+          "Content-Type": "application/json",
+      },
+    body: JSON.stringify({
+				URL,
+				HTML,
+				Thumbnail,
+				Category
+			})
+    
+  })
+}
+// Using this so that fields show current value when editing.
+$: ApiSpecificData, URL = $ApiSpecificData.URL, HTML = $ApiSpecificData.HTML, Thumbnail = $ApiSpecificData.Thumbnail, Category = $ApiSpecificData.Category; 
 
 </script>
 
@@ -82,25 +112,32 @@ afterUpdate(() => {
 
     <div class="content-wrapper">
         <div class="iframe-wrapper">
-        
-    
+          
     {@html $ApiSpecificData.HTML}
-
-    
-        
+    <div class="videoinfo">
+    </div>
+      
         </div>
         <div class="edit-wrapper">
-            <img src={edit} alt="edit" />
+            <img src={edit} alt="edit" on:click={editOverlayOn} />
+        </div>
+        <div id="edit-overlay">
+            <form class="edit-form">
+                <label>URL</label>
+                <input type="text" bind:value={URL} />
+                <label>HTML</label>
+                <input type="text" bind:value={HTML} />
+                <label>Thumbnail</label>
+                <input type="text" bind:value={Thumbnail} />
+                <label>Category</label>
+                <input type="text" bind:value={Category} />
+              </form>
         </div>
 
 </div>
 
 </div>
 
-<!-- <svelte:head> -->
-    <!-- Below script tag had to be added for tiktok videos -->
-    <!-- <script async src="https://www.tiktok.com/embed.js"></script> -->
-<!-- </svelte:head> -->
 
 
 
@@ -117,8 +154,14 @@ afterUpdate(() => {
     bottom: 0;
     background-color: rgba(0,0,0,0.5);
     z-index: 2;
+    overflow: auto;
     
 }
+
+.iframe-wrapper {
+    text-align: -webkit-center;
+}
+
 #overlay-close {
     z-index: 3;
     width: 5vw;
@@ -132,6 +175,44 @@ afterUpdate(() => {
     width: 100%;
     filter: drop-shadow(2px 4px 6px black);
 }
+
+.edit-wrapper {
+    width: 5vw;
+    position: fixed;
+    right: 7vw;
+    top: 50vh;
+    }
+
+.edit-wrapper img {
+    width: 100%;
+}
+
+#edit-overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.85);
+    z-index: 4;
+    overflow: auto;
+    
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.edit-form label {
+    color: white;
+}
+
 
 
 
