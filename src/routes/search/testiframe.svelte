@@ -1,0 +1,1 @@
+<script async src="https://www.tiktok.com/embed.js" on:load={console.log("tiktok script loaded")}></script>

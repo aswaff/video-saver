@@ -1,12 +1,15 @@
 
 <script>
 
-    
+
 import Box from '$lib/Box-Component/box.svelte'
 import { onMount } from "svelte";
-import { ApiSearchData, checkForData } from "$lib/video/store.js"
+import { ApiSearchData, ApiSpecificData, checkForData } from "$lib/video/store.js"
 // import { overlayOn, overlayOff } from "./overlay.svelte"
-import Overylay, {overlayOn} from "./overlay.svelte"
+import Overlay, {overlayOn} from "./overlay.svelte"
+
+
+// import Overlay from './overlay.svelte';
 // Selection in the search box
 let categoryOptions = [
 	{ id: "1", value: "Cute"},
@@ -67,6 +70,14 @@ const getThumbnail = () => {
 // }
 
 
+
+const buttonClick = (id) => {
+    overlayOn(id)
+    
+}
+
+
+
 </script>
 
 
@@ -90,24 +101,34 @@ const getThumbnail = () => {
 
     <p></p>
     <div class="box-wrapper">
-        {#each $ApiSearchData as { _id, URL, Thumbnail }, i}
+        {#each $ApiSearchData as { _id, URL, Thumbnail, HTML }, i}
         <Box>
-            <img src="{Thumbnail}" alt="thumbnail" on:click={overlayOn}/>
+            <img src="{Thumbnail}" alt="thumbnail" on:click={buttonClick(_id)}/>
             <!-- Will likely remove below -->
             <!-- <a href="/search/{_id}"><img src="{Thumbnail}" alt="thumbnail" /></a> -->
             <p></p>
             {URL}
-            <!-- Below is the overlay HTML content -->
-        <Overylay />
+            
+  
         </Box>
+        <!-- Below is the overlay HTML content -->
+        <!-- <Overlay 
+        url={URL}
+        id={_id}
+        HTML={HTML}
+        
+        
+        /> -->
         {/each}
+        <Overlay />
         
     </div>  
+
+    
 
 
 
 </div>
-
 
 
 <style>
