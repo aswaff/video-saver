@@ -53,6 +53,9 @@
     const editOverlayOn = () => {
         document.getElementById("edit-overlay").style.display = "block";
     }
+    const editOverlayOff = () => {
+        document.getElementById("edit-overlay").style.display = "none";
+    }
 
 //     onMount(async () => {
 //     fetch(`http://192.168.0.16:5000/tasks/${id}`)
@@ -78,22 +81,30 @@ afterUpdate(() => {
 })
 
 async function doUpdate () {
-  const res = await fetch(`http://192.168.0.16:5000/tasks/${ApiSpecificData._id}`, {
+  const res = await fetch(`http://192.168.0.16:5000/tasks/${$ApiSpecificData._id}`, {
     method: 'PUT',
     headers: {
           "Content-Type": "application/json",
       },
-    body: JSON.stringify({
-				URL,
-				HTML,
-				Thumbnail,
-				Category
-			})
+    body: JSON.stringify(
+				{
+                URL: $ApiSpecificData.URL,
+				HTML: $ApiSpecificData.HTML,
+				Thumbnail: $ApiSpecificData.Thumbnail,
+				Category: $ApiSpecificData.Category
+                }
+			)
     
   })
 }
 // Using this so that fields show current value when editing.
-$: ApiSpecificData, URL = $ApiSpecificData.URL, HTML = $ApiSpecificData.HTML, Thumbnail = $ApiSpecificData.Thumbnail, Category = $ApiSpecificData.Category; 
+URL = $ApiSpecificData.URL 
+HTML = $ApiSpecificData.HTML 
+Thumbnail = $ApiSpecificData.Thumbnail 
+Category = $ApiSpecificData.Category; 
+
+// $: ApiSpecificData, console.log($ApiSpecificData.Category)
+
 
 </script>
 
@@ -124,13 +135,23 @@ $: ApiSpecificData, URL = $ApiSpecificData.URL, HTML = $ApiSpecificData.HTML, Th
         <div id="edit-overlay">
             <form class="edit-form">
                 <label>URL</label>
-                <input type="text" bind:value={URL} />
+                <input type="text" bind:value={$ApiSpecificData.URL} />
                 <label>HTML</label>
-                <input type="text" bind:value={HTML} />
+                <input type="text" bind:value={$ApiSpecificData.HTML} />
                 <label>Thumbnail</label>
-                <input type="text" bind:value={Thumbnail} />
+                <input type="text" bind:value={$ApiSpecificData.Thumbnail} />
                 <label>Category</label>
-                <input type="text" bind:value={Category} />
+                <select bind:value={$ApiSpecificData.Category}>
+                        <option value="Other">Other</option>
+                        <option value="Cute">Cute</option>
+                        <option value="Music">Music</option>
+                </select>
+                <button type="button" on:click={doUpdate}>
+                    Update
+                </button>
+                <button type="button" on:click={editOverlayOff}>
+                    Cancel
+                </button>
               </form>
         </div>
 
