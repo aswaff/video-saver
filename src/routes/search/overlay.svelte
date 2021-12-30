@@ -97,6 +97,22 @@ async function doUpdate () {
     
   })
 }
+let deleteResponse;
+const deleteVideo = async () => {
+    await fetch(`http://192.168.0.16:5000/tasks/${$ApiSpecificData._id}`, {
+    method: 'Delete',
+    headers: {
+          "Content-Type": "application/json",
+      }
+    
+  })
+  .then(response => response.json())
+  .then(data => deleteResponse = data)
+  console.log(deleteResponse)
+
+}
+
+
 // Using this so that fields show current value when editing.
 URL = $ApiSpecificData.URL 
 HTML = $ApiSpecificData.HTML 
@@ -152,6 +168,15 @@ Category = $ApiSpecificData.Category;
                 <button type="button" on:click={editOverlayOff}>
                     Cancel
                 </button>
+                <div style="margin-top: 50px;">
+                    <button type="button" on:click={deleteVideo}>
+                        Delete Video
+                    </button>
+                    {#if deleteResponse}
+                        <section style="Color: white">{deleteResponse.message}</section>
+                    {/if}
+
+                </div>
               </form>
         </div>
 

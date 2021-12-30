@@ -14,7 +14,7 @@ export const videoUrl = derived(ApiData, ($ApiData) => {
   });
 
   export const checkForData = (Category) => {
-    updateSearchData(Category);
+    // updateSearchData(Category);
     fetch(`http://192.168.0.16:5000/search?Category=${Category}`)
             .then(response => response.json())
             .then(data => {
