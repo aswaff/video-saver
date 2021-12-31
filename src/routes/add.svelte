@@ -1,6 +1,7 @@
 <script	>
 import { onMount } from "svelte";
 import { ApiData } from "$lib/video/store.js"
+import {checkForData} from "$lib/video/store"
 let URLbox = ""
 let Catagory = ""
 let iframeResult;
@@ -159,6 +160,7 @@ async function doPost () {
 	  <p style="color: red">Error with fetching</p>
 	{/await}
 	  
+
 
 </div>
 

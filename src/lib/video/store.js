@@ -1,17 +1,17 @@
 import { writable, derived } from 'svelte/store';
 
-export const ApiData = writable(["Test"]);
+export const ApiData = writable();
 
 export const ApiSearchData = writable(["Empty"]);
 
 export const ApiSpecificData = writable(["Empty"]);
 
-export const videoUrl = derived(ApiData, ($ApiData) => {
-    if ($ApiData){
-      return $ApiData.map(video => video.HTML);
-    }
-    return ["Test"];
-  });
+// export const videoUrl = derived(ApiData, ($ApiData) => {
+//     if ($ApiData){
+//       return $ApiData.map(video => video.Thumbnail);
+//     }
+//     return ["Test"];
+//   });
 
   export const checkForData = (Category) => {
     // updateSearchData(Category);
@@ -25,6 +25,8 @@ export const videoUrl = derived(ApiData, ($ApiData) => {
             });
     
   }
+
+
 
   // derived(ApiSearchData, ($ApiSearchData) 
   export const apiSearchDataThumb = (data) => {

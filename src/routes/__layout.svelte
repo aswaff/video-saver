@@ -24,6 +24,7 @@
 		max-width: 1024px;
 		margin: 0 auto;
 		box-sizing: border-box;
+		/* min-height: 90vh; */
 	}
 
 	footer a {
@@ -34,6 +35,9 @@
 	position: fixed;
     bottom: 0;
     width: 100%;
+	/* height: 9%; */
+	height: calc(70px + env(safe-area-inset-bottom) + 0px)
+
 }
 
 

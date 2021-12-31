@@ -7,13 +7,8 @@
 	import { Swiper, SwiperSlide, } from 'swiper/svelte';
 	import { Virtual } from 'swiper';
 	import { onMount } from "svelte";
-	// import { get, store } from 'svelte/store';
-	import { ApiData, videoUrl } from "$lib/video/store.js"
-	// let ApiData_value;
-
-	// ApiData.subscribe(value => {
-	// 	ApiData_value = value;
-	// });
+	import { ApiData } from "$lib/video/store.js"
+	import Overlay, {overlayOn} from "./search/overlay.svelte"
 	
 	
 
@@ -42,7 +37,6 @@
   .then(response => response.json())
   .then(data => {
 	  	ApiData.set(data)
-		console.log($videoUrl)
   }).catch(error => {
     console.log(error);
     return [];
@@ -58,6 +52,11 @@ const slideChange = () => {
 	console.log('slide change');
 }
 
+const buttonClick = (id) => {
+    overlayOn(id)
+    
+}
+
 </script>
 
 
@@ -66,6 +65,7 @@ const slideChange = () => {
 	<script async src="https://www.tiktok.com/embed.js"></script>
 	
 </svelte:head>
+{#if $ApiData}
 <div id="swiperwrap">
 	
 	<!-- autoHeight="{true}" 
@@ -77,7 +77,7 @@ const slideChange = () => {
 		  
 		on:slideChange={() => slideChange() }
 		on:swiper={(e) => console.log(e.detail[0])}
-		virtual={{ slides: $videoUrl }}
+		virtual={{ slides: $ApiData }}
     	let:virtualData={{ slides, offset, from }}
 		class="mySwiper"
 	>
@@ -90,18 +90,22 @@ const slideChange = () => {
 			<!-- Added the below iframe so certain sites would play videos, direct URL is needed -->
 			<!-- Need to investigate forwarding click events to swiper js from below divgi -->
 			<!-- <div class="iframe-overlay"></div> -->
-			<div class="iframe-holder">
-				<div>
-{@html slide}
-</div>
-</div>
+			<div class="content-holder">
+				<div class="image-holder">
+					
+					
+					<img src={slide.Thumbnail} alt="videothumbnail" on:click={buttonClick(slide._id)}/>
+					
+				</div>
+			</div>
 			
 		</SwiperSlide>
 	{/each}
 
 		</Swiper>
-	
+	<Overlay />
 </div>
+{/if}
 
 
 
@@ -121,24 +125,23 @@ html,body {
 	position: absolute;
 }
 
-.iframe-controls {
-	height: 90vh;
+.content-holder {
+	height: 100%;
 	display: flex;
-    justify-content: center;
+    align-items: center;
+	justify-content: center;
 	
 }
 
-.iframe-holder {
-	height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: -webkit-center;
+.image-holder {
+	
 }
 
-.iframe-holder div {
-	overflow-y: clip;
-	height: 90vh;
+.image-holder img {
+	max-width: 100%;
+    max-height: 80vh;
+    height: auto;
+    width: auto;
 }
 
 /* .iframe {
