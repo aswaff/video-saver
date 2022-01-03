@@ -168,7 +168,7 @@ Category = $ApiSpecificData.Category;
                 <button type="button" on:click={editOverlayOff}>
                     Cancel
                 </button>
-                <div style="margin-top: 50px;">
+                <div style="margin-top: 50px;" class="delete-button">
                     <button type="button" on:click={deleteVideo}>
                         Delete Video
                     </button>
@@ -266,6 +266,15 @@ Category = $ApiSpecificData.Category;
 
 .edit-form label {
     color: white;
+}
+
+.delete-button button {
+    background-color: #8a3030;
+    padding: 19px;
+    border-radius: 11px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
 }
 
 
