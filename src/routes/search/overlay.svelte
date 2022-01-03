@@ -210,11 +210,15 @@ Category = $ApiSpecificData.Category;
 
 #overlay-close {
     z-index: 3;
-    width: 5vw;
+    /* width: 5vw; */
     position: fixed;
-    right: 7vw;
+    right: 0vw;
     top: 12vh;
     cursor: pointer;
+    background-color: #1b7fcc;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 5px;
 }
 #overlay-close img {
     height: 100%;
@@ -223,14 +227,19 @@ Category = $ApiSpecificData.Category;
 }
 
 .edit-wrapper {
-    width: 5vw;
     position: fixed;
-    right: 7vw;
-    top: 50vh;
-    }
+    right: 0vw;
+    top: 22vh;
+    cursor: pointer;
+    background-color: #1b7fcc;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 5px;
+}
 
 .edit-wrapper img {
     width: 100%;
+    filter: drop-shadow(2px 4px 6px black);
 }
 
 #edit-overlay {
