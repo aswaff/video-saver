@@ -25,6 +25,7 @@
 		margin: 0 auto;
 		box-sizing: border-box;
 		padding-bottom: 10vh;
+		
 		/* min-height: 90vh; */
 	}
 
