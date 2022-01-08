@@ -124,9 +124,9 @@ async function doPost () {
 	<h1>Add a video</h1>
 	
 	<form class="content">
-		<label>Video URL</label>
-		<input type="text"  bind:value={URLbox}/>
-		<button type="button" on:click={firstClick}>
+		<input type="text"  bind:value={URLbox} placeholder="Enter Video URL" />
+		<br />
+		<button type="button" on:click={firstClick} style="margin-top: 20px;">
 			Search for Video
 		</button>
 	  </form>
@@ -170,7 +170,37 @@ async function doPost () {
 		max-width: var(--column-width);
 		margin: var(--column-margin-top) auto 0 auto;
 		text-align: center;
+		color: white;
 	}
+
+	.content-wrapper h1 {
+		color: white;
+	}
+
+	input {
+		width: 90%;
+		padding: 12px 20px;
+		/* margin: 8px 0; */
+		/* display: inline-block; */
+		/* border: 1px solid #ccc; */
+		border-radius: 4px;
+		box-sizing: border-box;	
+	}
+
+	.content-wrapper button {
+	margin: 15px;
+    background-color: #646971;
+    padding: 19px;
+    border-radius: 11px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    color: white;
+    width: 125px;
+    align-self: center;
+	}
+
+
 
 	img {
 		height: 25vh;

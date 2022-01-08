@@ -106,7 +106,7 @@ const buttonClick = (id) => {
             <img src="{Thumbnail}" alt="thumbnail" on:click={buttonClick(_id)}/>
             <!-- Will likely remove below -->
             <!-- <a href="/search/{_id}"><img src="{Thumbnail}" alt="thumbnail" /></a> -->
-            <p></p>
+            <br />
             <p>{URL}</p>
             
   
@@ -134,7 +134,6 @@ const buttonClick = (id) => {
 <style>
 	.content-wrapper {
 		width: 100%;
-        margin-top: 5%;
 		/* max-width: var(--column-width); */
 		/* margin: var(--column-margin-top) auto 0 auto; */
 		text-align: center;
