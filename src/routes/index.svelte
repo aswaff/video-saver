@@ -142,6 +142,7 @@ html,body {
     max-height: 80vh;
     height: auto;
     width: auto;
+	cursor: pointer;
 }
 
 /* .iframe {

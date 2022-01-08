@@ -181,6 +181,7 @@ const buttonClick = (id) => {
 
     .box-wrapper img {
         width: 100%;
+        cursor: pointer;
     }
 
 </style>
