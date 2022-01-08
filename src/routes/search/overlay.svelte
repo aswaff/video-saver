@@ -48,6 +48,11 @@
         document.getElementById("overlay").style.display = "none";
         document.body.style.overflow = "auto"
 
+        // Need to refresh component when closing video
+        // Because Svelte's reactivity is triggered by assignments the above command will not refresh
+        // One way to fix that is to add an assignment, on close we are changing ApiSpecificData to a empty array.
+        ApiSpecificData.set([])
+
     }
 
     const editOverlayOn = () => {
@@ -55,6 +60,7 @@
     }
     const editOverlayOff = () => {
         document.getElementById("edit-overlay").style.display = "none";
+        
     }
 
 //     onMount(async () => {

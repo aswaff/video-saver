@@ -1,6 +1,9 @@
 {
   "name": "video-saver",
   "version": "0.0.1",
+  "engines": {
+    "node": "14.17.1"
+  },
   "scripts": {
     "dev": "svelte-kit dev --host",
     "build": "svelte-kit build",
