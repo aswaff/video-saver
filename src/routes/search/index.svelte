@@ -88,7 +88,6 @@ const buttonClick = (id) => {
 
 <div class="content-wrapper">
     <h1>Search</h1>
-    Select Category:
     <select bind:value={Category}>
         {#each categoryOptions as option}
             <option value={option.value}>{option.value}</option>

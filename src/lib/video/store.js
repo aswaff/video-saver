@@ -2,7 +2,7 @@ import { writable, derived } from 'svelte/store';
 
 export const ApiData = writable();
 
-export const ApiSearchData = writable(["Empty"]);
+export const ApiSearchData = writable([]);
 
 export const ApiSpecificData = writable(["Empty"]);
 
