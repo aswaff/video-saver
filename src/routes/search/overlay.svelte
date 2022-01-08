@@ -162,12 +162,12 @@ Category = $ApiSpecificData.Category;
                         <option value="Cute">Cute</option>
                         <option value="Music">Music</option>
                 </select>
-                <button type="button" on:click={doUpdate}>
-                    Update
-                </button>
-                <button type="button" on:click={editOverlayOff}>
-                    Cancel
-                </button>
+                    <button class="update-button" type="button" on:click={doUpdate}>
+                        Update
+                    </button>
+                    <button class="close-button" type="button" on:click={editOverlayOff}>
+                        Close
+                    </button>
                 <div style="margin-top: 50px;" class="delete-button">
                     <button type="button" on:click={deleteVideo}>
                         Delete Video
@@ -206,6 +206,10 @@ Category = $ApiSpecificData.Category;
 
 .iframe-wrapper {
     text-align: -webkit-center;
+    height: 89vh;
+    display: flex;
+    align-content: center;
+    align-items: center;
 }
 
 #overlay-close {
@@ -213,7 +217,7 @@ Category = $ApiSpecificData.Category;
     /* width: 5vw; */
     position: fixed;
     right: 0vw;
-    top: 12vh;
+    top: 30%;
     cursor: pointer;
     background-color: #40444b;
     border-top-left-radius: 10px;
@@ -229,7 +233,7 @@ Category = $ApiSpecificData.Category;
 .edit-wrapper {
     position: fixed;
     right: 0vw;
-    top: 22vh;
+    top: 40%;
     cursor: pointer;
     background-color: #40444b;
     border-top-left-radius: 10px;
@@ -262,10 +266,47 @@ Category = $ApiSpecificData.Category;
     flex-direction: column;
     flex-wrap: wrap;
     align-content: center;
+    padding-top: 10vh;
+}
+
+.edit-form input, select {
+    width: 90%;
+    padding: 12px 20px;
+    /* margin: 8px 0; */
+    /* display: inline-block; */
+    /* border: 1px solid #ccc; */
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .edit-form label {
     color: white;
+}
+
+.update-button {
+    background-color: #2a623e;
+    margin-top: 20px;
+    padding: 19px;
+    border-radius: 11px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    color: white;
+    width: 125px;
+    align-self: center;
+}
+
+.close-button {
+    background-color: #40444b;
+    margin-top: 50px;
+    padding: 19px;
+    border-radius: 11px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    color: white;
+    width: 125px;
+    align-self: center;
 }
 
 .delete-button button {
@@ -275,6 +316,7 @@ Category = $ApiSpecificData.Category;
     text-decoration: none;
     cursor: pointer;
     border: none;
+    color: white;
 }
 
 

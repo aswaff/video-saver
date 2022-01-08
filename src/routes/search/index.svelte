@@ -107,7 +107,7 @@ const buttonClick = (id) => {
             <!-- Will likely remove below -->
             <!-- <a href="/search/{_id}"><img src="{Thumbnail}" alt="thumbnail" /></a> -->
             <p></p>
-            {URL}
+            <p>{URL}</p>
             
   
         </Box>
@@ -138,20 +138,51 @@ const buttonClick = (id) => {
 		/* max-width: var(--column-width); */
 		/* margin: var(--column-margin-top) auto 0 auto; */
 		text-align: center;
+        color: white;
 	}
+    h1 {
+        color: white;
+    }
 
     select {
-        width: 20vw;
+    width: 20vw;
+    height: 40px;
+    padding: 12px 20px;
+    /* margin: 8px 0; */
+    /* display: inline-block; */
+    /* border: 1px solid #ccc; */
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+
+    button {
+    margin: 15px;
+    background-color: #646971;
+    padding: 19px;
+    border-radius: 11px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    color: white;
+    width: 125px;
+    align-self: center;
     }
 
     .box-wrapper {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
+        color: black;
+    }
+
+    .box-wrapper p {
+        padding: 10px;
+        overflow-wrap: break-word;
+
     }
 
     .box-wrapper img {
-        width: 30vw;
+        width: 100%;
     }
 
 </style>
