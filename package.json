@@ -5,6 +5,7 @@
     "node": "14.17.1"
   },
   "scripts": {
+    "start": "node build/index.js",
     "dev": "svelte-kit dev --host",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
@@ -26,6 +27,7 @@
   "dependencies": {
     "@fontsource/fira-mono": "^4.5.0",
     "@lukeed/uuid": "^2.0.0",
+    "@sveltejs/adapter-node": "^1.0.0-next.60",
     "cookie": "^0.4.1",
     "svelte-hamburgers": "^3.0.1",
     "swiper": "^7.3.1"
