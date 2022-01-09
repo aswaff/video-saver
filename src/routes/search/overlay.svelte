@@ -29,7 +29,7 @@
 <script>
     // import { onMount } from "svelte";
     import { ApiSpecificData } from '$lib/video/store';
-    import closeButton from "./iconmonstr-x-mark-1.svg";
+    import closeButton from "src/routes/search/iconmonstr-x-mark-1.svg";
     import edit from "./iconmonstr-pencil-10.svg";
     import { afterUpdate } from 'svelte';
     import { onMount } from "svelte";
