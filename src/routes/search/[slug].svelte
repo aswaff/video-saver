@@ -8,7 +8,7 @@ import { onMount } from "svelte";
 import edit from "./iconmonstr-pencil-10.svg";
 
     const checkForData = () => {
-        fetch(`http://192.168.0.16:5000/tasks/${$page.params.slug}`)
+        fetch(`https://video-saver-api.herokuapp.com/tasks/${$page.params.slug}`)
         .then(response => response.json())
         .then(data => {
                 ApiSpecificData.set(data)
@@ -22,7 +22,7 @@ import edit from "./iconmonstr-pencil-10.svg";
 // checkForData()
 
 onMount(async () => {
-    fetch(`http://192.168.0.16:5000/tasks/${$page.params.slug}`)
+    fetch(`https://video-saver-api.herokuapp.com/tasks/${$page.params.slug}`)
         .then(response => response.json())
         .then(data => {
                 ApiSpecificData.set(data)
@@ -63,12 +63,8 @@ $: ApiSpecificData, console.log($ApiSpecificData)
 
 
 <style>
-    body {
-
-    }
 
     .content-wrapper {
-    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -82,23 +78,9 @@ $: ApiSpecificData, console.log($ApiSpecificData)
 
     .iframe-wrapper {
     position: relative;
-    /* width: 100%;
-    height: 100%; */
-    /* padding-bottom: 56.25%; */
     width: 78%;
     height: 78%;
     text-align: -webkit-center;
-    /* display: flex;
-    align-items: center; */
-    }
-
-    .iframe-wrapper iframe {
-    position: absolute;
-    /* width: 100%; */
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
     }
 
     .edit-wrapper {

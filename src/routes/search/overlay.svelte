@@ -9,7 +9,7 @@
     }
     
     const getData = async (id) => {
-        await fetch(`http://192.168.0.16:5000/tasks/${id}`)
+        await fetch(`https://video-saver-api.herokuapp.com/tasks/${id}`)
         .then(response => response.json())
         .then(data => {
                 ApiSpecificData.set(data);
@@ -27,12 +27,11 @@
 </script>
 
 <script>
-    // import { onMount } from "svelte";
     import { ApiSpecificData } from '$lib/video/store';
     import closeButton from "./iconmonstr-x-mark-1.svg";
     import edit from "./iconmonstr-pencil-10.svg";
     import { afterUpdate } from 'svelte';
-    import { onMount } from "svelte";
+import { text } from 'svelte/internal';
 
     let URL;
     let HTML;
@@ -41,7 +40,6 @@
 
 
 
-    // export let HTML;
 
     const overlayOff = () => {
         console.log("Turning overlay Off")
@@ -63,20 +61,6 @@
         
     }
 
-//     onMount(async () => {
-//     fetch(`http://192.168.0.16:5000/tasks/${id}`)
-//         .then(response => response.json())
-//         .then(data => {
-//                 ApiSpecificData.set(data)
-                
-//         })
-//         .catch(error => {
-//             console.log(error);
-//             return [];
-//         });
-	
-// });
-
 // After a day of trying to figure this out, below code works for making tiktok embed js videos load.
 // Adding them to head does not always work
 afterUpdate(() => {
@@ -87,7 +71,7 @@ afterUpdate(() => {
 })
 
 async function doUpdate () {
-  const res = await fetch(`http://192.168.0.16:5000/tasks/${$ApiSpecificData._id}`, {
+  const res = await fetch(`https://video-saver-api.herokuapp.com/tasks/${$ApiSpecificData._id}`, {
     method: 'PUT',
     headers: {
           "Content-Type": "application/json",
@@ -105,7 +89,7 @@ async function doUpdate () {
 }
 let deleteResponse;
 const deleteVideo = async () => {
-    await fetch(`http://192.168.0.16:5000/tasks/${$ApiSpecificData._id}`, {
+    await fetch(`https://video-saver-api.herokuapp.com/tasks/${$ApiSpecificData._id}`, {
     method: 'Delete',
     headers: {
           "Content-Type": "application/json",
@@ -124,8 +108,6 @@ URL = $ApiSpecificData.URL
 HTML = $ApiSpecificData.HTML 
 Thumbnail = $ApiSpecificData.Thumbnail 
 Category = $ApiSpecificData.Category; 
-
-// $: ApiSpecificData, console.log($ApiSpecificData.Category)
 
 
 </script>
@@ -156,12 +138,15 @@ Category = $ApiSpecificData.Category;
         </div>
         <div id="edit-overlay">
             <form class="edit-form">
-                <label>URL</label>
+                <label>URL
                 <input type="text" bind:value={$ApiSpecificData.URL} />
-                <label>HTML</label>
+                </label>
+                <label>HTML
                 <input type="text" bind:value={$ApiSpecificData.HTML} />
-                <label>Thumbnail</label>
+                </label>
+                <label>Thumbnail
                 <input type="text" bind:value={$ApiSpecificData.Thumbnail} />
+                </label>
                 <label>Category</label>
                 <select bind:value={$ApiSpecificData.Category}>
                         <option value="Other">Other</option>

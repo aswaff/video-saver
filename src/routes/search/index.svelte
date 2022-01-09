@@ -33,7 +33,7 @@ let videoThumbnail;
 $: ApiSearchData, console.log($ApiSearchData)
 
 // onMount(async () => {
-//   fetch("http://192.168.0.16:5000/tasks")
+//   fetch("https://video-saver-api.herokuapp.com/tasks")
 //   .then(response => response.json())
 //   .then(data => {
 // 	  	ApiSearchData.set(data)
@@ -59,7 +59,7 @@ const getThumbnail = () => {
 
 // Checks to see if store is up to date
 // const checkForData = () => {
-//         fetch(`http://192.168.0.16:5000/search?Category=${Category}`)
+//         fetch(`https://video-saver-api.herokuapp.com/search?Category=${Category}`)
 //         .then(response => response.json())
 //         .then(data => {
 //                 ApiSearchData.set(data)

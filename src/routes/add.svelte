@@ -37,7 +37,7 @@ let Category = "Other";
 
 // Pulls videos from database
 onMount(async () => {
-  fetch("http://192.168.0.16:5000/tasks")
+  fetch("https://video-saver-api.herokuapp.com/tasks")
   .then(response => response.json())
   .then(data => {
 	  	ApiData.set(data)
@@ -95,7 +95,7 @@ const firstClick = () => {
 }
 // Performs the push to the mongo database
 async function doPost () {
-		const res = await fetch('http://192.168.0.16:5000/tasks', {
+		const res = await fetch('https://video-saver-api.herokuapp.com/tasks', {
 			method: 'POST',
 			headers: {
       			"Content-Type": "application/json",

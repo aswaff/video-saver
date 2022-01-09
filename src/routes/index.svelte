@@ -33,7 +33,7 @@
 
 
 	onMount(async () => {
-  fetch("http://192.168.0.16:5000/tasks")
+  fetch("https://video-saver-api.herokuapp.com/tasks")
   .then(response => response.json())
   .then(data => {
 	  	ApiData.set(data)
@@ -119,21 +119,11 @@ html,body {
 
 
 
-.iframe-overlay {
-	width: 90vw;
-	height: 70%;
-	position: absolute;
-}
-
 .content-holder {
 	height: 100%;
 	display: flex;
     align-items: center;
 	justify-content: center;
-	
-}
-
-.image-holder {
 	
 }
 

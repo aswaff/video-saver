@@ -15,7 +15,7 @@ export const ApiSpecificData = writable(["Empty"]);
 
   export const checkForData = (Category) => {
     // updateSearchData(Category);
-    fetch(`http://192.168.0.16:5000/search?Category=${Category}`)
+    fetch(`https://video-saver-api.herokuapp.com/search?Category=${Category}`)
             .then(response => response.json())
             .then(data => {
                     ApiSearchData.set(data)
@@ -45,7 +45,7 @@ export const ApiSpecificData = writable(["Empty"]);
 
 
   export const updateSearchData = (Category) => {
-    fetch(`http://192.168.0.16:5000/search?Category=${Category}`)
+    fetch(`https://video-saver-api.herokuapp.com/search?Category=${Category}`)
     .then(response => response.json())
     .then(data => {
             apiSearchDataThumb(data)
@@ -57,7 +57,7 @@ export const ApiSpecificData = writable(["Empty"]);
 
 async function doUpdate (id, thumbnail) {
   
-  const res = await fetch(`http://192.168.0.16:5000/tasks/${id}`, {
+  const res = await fetch(`https://video-saver-api.herokuapp.com/tasks/${id}`, {
     method: 'PUT',
     headers: {
           "Content-Type": "application/json",
