@@ -6,9 +6,9 @@ export const handle = async ({ request, resolve }) => {
 	request.locals.userid = cookies.userid || uuid();
 
 	// TODO https://github.com/sveltejs/kit/issues/1046
-	if (request.method.has('_method')) {
-		request.method = request.method.toUpperCase();
-	}
+	// if (request.query.has('_method')) {
+	// 	request.method = request.query.get('_method').toUpperCase();
+	// }
 
 	const response = await resolve(request);
 
