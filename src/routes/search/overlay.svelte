@@ -115,7 +115,6 @@ Category = $ApiSpecificData.Category;
 
 
 <svelte:head>
-    <title>Overlay</title>
     
 
 </svelte:head>
@@ -197,7 +196,6 @@ Category = $ApiSpecificData.Category;
 
 .iframe-wrapper {
     text-align: -webkit-center;
-    height: 89vh;
     display: flex;
     align-content: center;
     align-items: center;
