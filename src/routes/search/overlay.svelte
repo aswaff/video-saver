@@ -196,6 +196,7 @@ Category = $ApiSpecificData.Category;
 
 .iframe-wrapper {
     text-align: -webkit-center;
+    min-height: 89vh;
     display: flex;
     align-content: center;
     align-items: center;
