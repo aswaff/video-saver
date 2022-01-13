@@ -7,7 +7,7 @@
 	import { Swiper, SwiperSlide, } from 'swiper/svelte';
 	import { Virtual } from 'swiper';
 	import { onMount } from "svelte";
-	import { ApiData } from "$lib/video/store.js"
+	import { ApiData, apiSpecificDataThumb } from "$lib/video/store.js"
 	import Overlay, {overlayOn} from "./search/overlay.svelte"
 	
 	
@@ -26,13 +26,13 @@
 	import SwiperCore, {
 		Pagination,
 		} from 'swiper';
+import { slide } from "svelte/transition";
 	
 	SwiperCore.use([Pagination, Virtual]);
 	
 
 
-
-	onMount(async () => {
+const updateData = () => {
   fetch("https://video-saver-api.herokuapp.com/tasks")
   .then(response => response.json())
   .then(data => {
@@ -41,7 +41,10 @@
     console.log(error);
     return [];
   });
-});
+
+}
+updateData()
+
 $: ApiData, console.log($ApiData)
 // Function that runs on each slide change
 const slideChange = () => {
@@ -56,6 +59,13 @@ const buttonClick = (id) => {
     overlayOn(id)
     
 }
+
+const updateThumbnail = (data) => {
+	apiSpecificDataThumb(data)
+	updateData()
+	console.log("Running updatethumb")
+}
+
 
 </script>
 
@@ -81,21 +91,19 @@ const buttonClick = (id) => {
     	let:virtualData={{ slides, offset, from }}
 		class="mySwiper"
 	>
-	{#each slides as slide, index (from + index)}
+	{#each slides as slide,  index (from + index)}
 		<SwiperSlide
 			virtualIndex={from + index}
 			style={`top: ${offset}px`}
 			
 		>
+		
 			<!-- Added the below iframe so certain sites would play videos, direct URL is needed -->
 			<!-- Need to investigate forwarding click events to swiper js from below divgi -->
 			<!-- <div class="iframe-overlay"></div> -->
 			<div class="content-holder">
 				<div class="image-holder">
-					
-					
-					<img src={slide.Thumbnail} alt="videothumbnail" on:click={buttonClick(slide._id)}/>
-					
+				<img src={slide.Thumbnail} alt="videothumbnail" on:click={buttonClick(slide._id)} on:error={updateThumbnail(slide)}/>
 				</div>
 			</div>
 			

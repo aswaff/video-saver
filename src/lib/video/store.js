@@ -14,7 +14,7 @@ export const ApiSpecificData = writable(["Empty"]);
 //   });
 
   export const checkForData = (Category) => {
-    // updateSearchData(Category);
+    updateSearchData(Category);
     fetch(`https://video-saver-api.herokuapp.com/search?Category=${Category}`)
             .then(response => response.json())
             .then(data => {
@@ -41,6 +41,18 @@ export const ApiSpecificData = writable(["Empty"]);
           return [];
       }));
   }
+// This is used by the homepage
+  export const apiSpecificDataThumb = (data) => {
+    console.log(data)
+      fetch(`https://iframe.ly/api/oembed?url=${data.URL}&key=5684147d970b5663f90cfc1c15410b81`)
+      .then(response => response.json())
+      .then(newData => {
+              doUpdate(data._id, newData.thumbnail_url)
+      }).catch(error => {
+          console.log(error);
+          return [];
+      });
+  }
 
 
 
@@ -56,7 +68,6 @@ export const ApiSpecificData = writable(["Empty"]);
 }
 
 async function doUpdate (id, thumbnail) {
-  
   const res = await fetch(`https://video-saver-api.herokuapp.com/tasks/${id}`, {
     method: 'PUT',
     headers: {
