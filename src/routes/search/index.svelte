@@ -4,7 +4,7 @@
 
 import Box from '$lib/Box-Component/box.svelte'
 import { onMount } from "svelte";
-import { ApiSearchData, ApiSpecificData, checkForData } from "$lib/video/store.js"
+import { ApiSearchData, apiSearchThumbnail, checkForData } from "$lib/video/store.js"
 // import { overlayOn, overlayOff } from "./overlay.svelte"
 import Overlay, {overlayOn} from "./overlay.svelte"
 
@@ -30,7 +30,7 @@ let videoThumbnail;
  $: searchResult, console.log(searchResult)
 
 
-$: ApiSearchData, console.log($ApiSearchData)
+
 
 // onMount(async () => {
 //   fetch("https://video-saver-api.herokuapp.com/tasks")
@@ -44,18 +44,18 @@ $: ApiSearchData, console.log($ApiSearchData)
 // });
 
 // testing... possibly will remove
-const getThumbnail = () => {
-   ApiSearchData.map(video =>
-        fetch(`https://iframe.ly/api/oembed?url=${video.URL}&key=5684147d970b5663f90cfc1c15410b81`)
-        .then(response => response.json())
-        .then(data => {
-                ApiSearchData.set(data)
-        }).catch(error => {
-            console.log(error);
-            return [];
-        })
-   )
-}
+// const getThumbnail = () => {
+//    ApiSearchData.map(video =>
+//         fetch(`https://iframe.ly/api/oembed?url=${video.URL}&key=5684147d970b5663f90cfc1c15410b81`)
+//         .then(response => response.json())
+//         .then(data => {
+//                 ApiSearchData.set(data)
+//         }).catch(error => {
+//             console.log(error);
+//             return [];
+//         })
+//    )
+// }
 
 // Checks to see if store is up to date
 // const checkForData = () => {
@@ -73,6 +73,16 @@ const getThumbnail = () => {
 
 const buttonClick = (id) => {
     overlayOn(id)
+    
+}
+
+const imageError = (URL, id) => {
+    apiSearchThumbnail(URL, id)
+    console.log("Running updatethumbnail")
+    checkForData(Category)
+    ApiSearchData.set(ApiSearchData)
+    
+   
     
 }
 
@@ -102,7 +112,9 @@ const buttonClick = (id) => {
     <div class="box-wrapper">
         {#each $ApiSearchData as { _id, URL, Thumbnail, HTML }, i}
         <Box>
-            <img src="{Thumbnail}" alt="thumbnail" on:click={buttonClick(_id)}/>
+            <div class="image-wrapper">
+             <img src="{Thumbnail}" alt="thumbnail" on:click={buttonClick(_id)} on:error={imageError(URL, _id)}/>
+            </div>
             <!-- Will likely remove below -->
             <!-- <a href="/search/{_id}"><img src="{Thumbnail}" alt="thumbnail" /></a> -->
             <br />
@@ -179,8 +191,15 @@ const buttonClick = (id) => {
 
     }
 
-    .box-wrapper img {
-        width: 100%;
+    .image-wrapper {
+        background-color: black;
+        
+    }
+
+    .image-wrapper img {
+        max-height: 275px;
+        max-width: 100%;
+        margin-bottom: -4px;
         cursor: pointer;
     }
 

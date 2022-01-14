@@ -63,7 +63,9 @@ const buttonClick = (id) => {
 const updateThumbnail = (data) => {
 	apiSpecificDataThumb(data)
 	updateData()
-	console.log("Running updatethumb")
+	console.log("Running updatethumbnail")
+	// Below code forces the image to rerender
+	ApiData.set(ApiData)
 }
 
 
@@ -84,7 +86,7 @@ const updateThumbnail = (data) => {
 		modules={[Virtual]}
 		style="height:100%;"
 		direction="{'vertical'}"
-		  
+		
 		on:slideChange={() => slideChange() }
 		on:swiper={(e) => console.log(e.detail[0])}
 		virtual={{ slides: $ApiData }}
