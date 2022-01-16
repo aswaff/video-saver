@@ -200,6 +200,9 @@ Category = $ApiSpecificData.Category;
     display: flex;
     align-content: center;
     align-items: center;
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #overlay-close {
