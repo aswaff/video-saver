@@ -6,6 +6,15 @@
         document.getElementById("overlay").style.display = "block";
         document.body.style.overflow = "hidden"
         getData(_id)
+
+        // After a day of trying to figure this out, below code works for making tiktok embed js videos load.
+        // Adding them to head does not always work
+        const script = document.createElement('script')
+        script.async = true
+        script.src = "https://www.tiktok.com/embed.js"
+        script.className = "tiktokscript"
+        document.body.appendChild(script)
+        
     }
     
     const getData = async (id) => {
@@ -30,8 +39,6 @@
     import { ApiSpecificData } from '$lib/video/store';
     import closeButton from "./iconmonstr-x-mark-1.svg";
     import edit from "./iconmonstr-pencil-10.svg";
-    import { afterUpdate } from 'svelte';
-import { text } from 'svelte/internal';
 
     let URL;
     let HTML;
@@ -51,24 +58,25 @@ import { text } from 'svelte/internal';
         // One way to fix that is to add an assignment, on close we are changing ApiSpecificData to a empty array.
         ApiSpecificData.set([])
 
+        // This is to remove the tiktok script, so that after opening many videos, we don't end up with multiple appended scripts
+        const elements = document.getElementsByClassName("tiktokscript");
+        while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0])};
+
     }
 
     const editOverlayOn = () => {
         document.getElementById("edit-overlay").style.display = "block";
+        
+
     }
     const editOverlayOff = () => {
         document.getElementById("edit-overlay").style.display = "none";
         
     }
 
-// After a day of trying to figure this out, below code works for making tiktok embed js videos load.
-// Adding them to head does not always work
-afterUpdate(() => {
-    const script = document.createElement('script')
-    script.async = true
-    script.src = "https://www.tiktok.com/embed.js"
-    document.body.appendChild(script)
-})
+
+
 
 async function doUpdate () {
   const res = await fetch(`https://video-saver-api.herokuapp.com/tasks/${$ApiSpecificData._id}`, {

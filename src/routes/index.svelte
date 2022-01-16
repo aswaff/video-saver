@@ -75,7 +75,6 @@ const updateThumbnail = (data) => {
 
 <svelte:head>
 	<title>Home</title>
-	<script async src="https://www.tiktok.com/embed.js"></script>
 	
 </svelte:head>
 {#if !$ApiData}
