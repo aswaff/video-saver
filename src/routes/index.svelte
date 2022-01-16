@@ -136,7 +136,7 @@ html,body {
 
 
 .content-holder {
-	height: 100%;
+	height: 89vh;
 	display: flex;
     align-items: center;
 	justify-content: center;
@@ -166,7 +166,7 @@ html,body {
 
 
 #swiperwrap {
-  height: 90vh;
+  height: 83vh;
   text-align: center;
 }
 
