@@ -78,14 +78,16 @@ const buttonClick = (id) => {
 
 const imageError = (URL, id) => {
     apiSearchThumbnail(URL, id)
-    console.log("Running updatethumbnail")
-    checkForData(Category)
-    ApiSearchData.set(ApiSearchData)
+    console.log("Bad thumbnail detected - updating...")
     
+    // checkForData(Category)
+    // console.log($ApiSearchData)
+    setTimeout(() => {  checkForData(Category); }, 1000);
    
     
 }
 
+// $: ApiSearchData, ApiSearchData.set($ApiSearchData)
 
 
 </script>
