@@ -9,6 +9,7 @@
 	import { onMount } from "svelte";
 	import { ApiData, apiSpecificDataThumb } from "$lib/video/store.js"
 	import Overlay, {overlayOn} from "./search/overlay.svelte"
+	import loader from "../../static/loader.svg"
 	
 	
 
@@ -77,7 +78,12 @@ const updateThumbnail = (data) => {
 	<script async src="https://www.tiktok.com/embed.js"></script>
 	
 </svelte:head>
-{#if $ApiData}
+{#if !$ApiData}
+<div class="loader-holder">
+<img src={loader} alt="loader" />
+</div>
+
+{:else}
 <div id="swiperwrap">
 	
 	<!-- autoHeight="{true}" 
@@ -135,6 +141,12 @@ html,body {
     align-items: center;
 	justify-content: center;
 	
+}
+
+.loader-holder {
+	height: 89vh;
+    display: flex;
+    align-self: center;
 }
 
 .image-holder img {
